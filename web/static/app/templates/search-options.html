@@ -1,0 +1,235 @@
+<div class="car-show">
+	<%
+        var fakeData = [
+            {
+                "className": "xe",
+                "width": "172",
+                "height": "51",
+                "img": "car1.png"
+            },
+            {
+                "className": "xf",
+                "width": "164",
+                "height": "53",
+                "img": "car2.png"
+            },
+            {
+                "className": "xf-sp",
+                "width": "170",
+                "height": "55",
+                "img": "car7.png"
+            },
+            {
+                "className": "xj",
+                "width": "183",
+                "height": "50",
+                "img": "car6.png"
+            },
+            {
+                "className": "newxf",
+                "width": "172",
+                "height": "51",
+                "img": "car3.png"
+            },
+            {
+                "className": "ftype",
+                "width": "164",
+                "height": "53",
+                "img": "car4.png"
+            },
+            {
+                "className": "ftype1",
+                "width": "156",
+                "height": "50",
+                "img": "car5.png"
+            },
+        ]
+
+        var fakeArr = [1,2,3,4,5,6,7];
+    %>
+    <ul class="car-show-smal">
+    	<% _.each(fakeArr, function(index) { %>
+            <% if(_.pick(doneData.options.series, index)[index]) { %>
+		        <li class="<%= fakeData[index-1].className%>">
+		            <div class="name">
+		                <span class="checkbox">
+		                    <% if(doneData.param.cus_series_id !== undefined) {%>
+                                <% if(doneData.param.cus_series_id.indexOf(index) > -1) {%>
+                                    <i class="checkbox-off" data-val="<%= index%>"></i>
+                                <% } else {%>
+                                    <i class="checkbox-on" data-val="<%= index%>"></i>
+                                <% } %>
+                            <% } else {%>
+                                <i class="checkbox-on" data-val="<%= index%>"></i>
+                            <% } %>
+		                </span>
+		                <i class="txt"></i>
+		            </div>
+                    <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="110">
+		        </li>
+        	<% } else {%>
+        		<li class="<%= fakeData[index-1].className%> off">
+		            <div class="name">
+		                <span class="checkbox">
+		                    <i class="checkbox-on" data-val="<%= index%>"></i>
+		                </span>
+		                <i class="txt"></i>
+		            </div>
+                    <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="110">
+		        </li>
+        	<% }%>
+        <% }) %>
+    </ul>
+    <ul class="car-show-big">
+    	<% _.each(fakeArr, function(index) { %>
+            <% if(_.pick(doneData.options.series, index)[index]) { %>
+		        <li class="<%= fakeData[index-1].className%>">
+                    <% if(index > 4) {%>
+                    <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="<%= fakeData[index-1].width%>" height="<%= fakeData[index-1].height%>" />
+                    <% }%>
+                    <div class="name">
+                        <span class="checkbox">
+                            <% if(doneData.param.cus_series_id !== undefined) {%>
+                                <% if(doneData.param.cus_series_id.indexOf(index) > -1) {%>
+                                    <i class="checkbox-off" data-val="<%= index%>"></i>
+                                <% } else {%>
+                                    <i class="checkbox-on" data-val="<%= index%>"></i>
+                                <% } %>
+                            <% } else {%>
+                                <i class="checkbox-on" data-val="<%= index%>"></i>
+                            <% } %>
+                        </span>
+                        <i class="txt"></i>
+                    </div>
+                    <% if(index <= 4){%>
+                        <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="<%= fakeData[index-1].width%>" height="<%= fakeData[index-1].height%>" />
+                    <% }%>
+                </li>
+        	<% } else {%>
+        		<li class="<%= fakeData[index-1].className%> off">
+                    <% if(index > 4) {%>
+                    <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="<%= fakeData[index-1].width%>" height="<%= fakeData[index-1].height%>" />
+                    <% }%>
+                    <div class="name">
+                        <span class="checkbox">
+                            <i class="checkbox-on" data-val="<%= index%>"></i>
+                        </span>
+                        <i class="txt"></i>
+                    </div>
+                    <% if(index <= 4){%>
+                        <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="<%= fakeData[index-1].width%>" height="<%= fakeData[index-1].height%>" />
+                    <% }%>
+                </li>
+        	<% }%>
+        <% }) %>
+    </ul>
+</div>
+<div class="index-search car-list-left w1280-module-1">
+    <p class="til">所在地区</p>
+    <div class="search-box">
+        <select id="province">
+            <option value="all">全部省份</option>
+            <% _.each(doneData.options.province, function(data) {%>
+                <% if(doneData.param.province_py === data.nickName) {%>
+                    <option value="<%= data.nickName%>" selected><%= data.name%></option>
+                <%} else {%>
+                    <option value="<%= data.nickName%>"><%= data.name%></option>
+                <% }%>
+            <% })%>
+        </select>
+        <select id="city">
+            <option value="all">全部城市</option>
+            <% if(doneData._targetEvt === "change"){%>
+                <% _.each(doneData.options.city, function(data) {%>
+                    <% if(doneData.param.city_py === data.nickName) {%>
+                        <option value="<%= data.nickName%>" selected><%= data.name%></option>
+                    <%} else {%>
+                        <option value="<%= data.nickName%>"><%= data.name%></option>
+                    <% }%>
+                <% })%>
+            <% }%>
+        </select>
+    </div>
+</div>
+<div class="index-search car-list-left w1280-module-2">
+    <p class="til">价格（万元）</p>
+    <div class="layout-slider">
+      <input id="filter-price" type="slider" value="0;70" />
+    </div>
+</div>
+<div class="index-search car-list-left w1280-module-3">
+    <p class="til">里程（万公里）</p>
+    <div class="layout-slider">
+      <input id="filter-mileage" type="slider" value="0;10" />
+    </div>
+</div>
+<div class="index-search car-list-left w1280-module-4">
+    <p class="til">车龄（年）</p>
+    <div class="layout-slider">
+      <input id="filter-age" type="slider" value="0;5" />
+    </div>
+</div>
+<div class="car-list-left w1280-module-5">
+    <p class="til">颜色</p>
+    <div class="color-box">
+        <ul class="color">
+            <% _.each(doneData.attr.color, function(aval, aindex) {%>
+                <% if(_.has(doneData.options.color, aindex)) {%>
+                    <% if(doneData.selected.color && doneData.selected.color.nickName == aindex) {%>
+                        <li class="c<%= aindex%> on-b" data-index="<%= aindex%>">
+                            <i></i>
+                            <span>(<%= doneData.options.color[aindex].count%>)</span>
+                        </li>
+                    <% }else{%>
+                        <li class="c<%= aindex%>" data-index="<%= aindex%>">
+                            <i></i>
+                            <span>(<%= doneData.options.color[aindex].count%>)</span>
+                        </li>
+                    <% }%>
+                <% } else {%>
+                    <li class="c<%= aindex%> off-b">
+                        <i></i>
+                        <span></span>
+                    </li>
+                <% }%>
+            <% })%>
+        </ul>
+    </div>
+</div>
+<div class="car-list-left oil-speed w1280-module-6">
+    <p class="til">变速箱</p>
+    <ul>
+        <% _.each(doneData.attr.bsfs, function(name, index) {%>
+            <% if(_.has(doneData.options.bsfs, index)) {%>
+                <li data-id="<%= index%>">
+                    <span class="checkbox">
+                        <i class="checkbox-<%= (doneData.selected.bsfs && doneData.selected.bsfs.nickName == index) ? "off" : "on"%>"></i>
+                    </span>
+                    <%= name%>(<%= doneData.options.bsfs[index].count%>)
+                </li>
+            <% }else{%>
+                <li class="disabled" data-id="<%= index%>">
+                    <span class="checkbox">
+                        <i class="checkbox-on"></i>
+                    </span>
+                    <%= name%>(0)
+                </li>
+            <% }%>
+        <% })%>
+    </ul>
+</div>
+<div class="car-list-left engine w1280-module-7">
+    <p class="til">排量</p>
+    <div class="engine-box">
+        <ul>
+            <% _.each(doneData.attr.pql, function(name, index) {%>
+                <li class="<%= _.has(doneData.options.pql, index) ? '' : 'disabled' %>">
+                    <span class="checkbox">
+                        <i class="checkbox-<%= (doneData.selected.pql && doneData.selected.pql.nickName == index) ? "off" : "on"%>"></i>
+                    </span>
+                    <span class="title"><%= name%></span>
+                </li>
+            <% })%>
+        </ul>
+    </div>
+</div>

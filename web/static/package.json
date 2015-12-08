@@ -1,0 +1,19 @@
+{
+  "name": "jaguar.com",
+  "version": "1.0.1",
+  "description": "jaguar.com",
+  "main": "index.js",
+  "dependencies": {
+    "requirejs": "~2.1.22",
+    "requirejs-text": "~2.0.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jaguar.com"
+  ],
+  "author": "heicx_sudo",
+  "license": "ISC"
+}

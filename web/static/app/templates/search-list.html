@@ -1,0 +1,107 @@
+<div class="detail-list-main" id="searchList">
+    <div class="return-quantity">
+        <a href="#index" class="return-btn list-return-btn" style="display:<%= listData.curPage === 'detail' ? '' : 'none'%>">
+            <i>&lt;</i>返回搜索
+        </a>
+        <div class="quantity">
+            <span class="font-txt"><%= listData.lists ? listData.page.total_number : listData.length%></span>
+            <span class="txt">辆匹配车源</span>
+        </div>
+    </div>
+    <div class="result clearfix">
+        <div class="result-fl">
+            <div class="print">
+                <span>打印当前列表</span>
+            </div>
+        </div>
+        <% if(listData.lists && listData.page.totalpage != 0) {%>
+            <div class="result-fr">
+                <div class="page">
+                    <% if(listData.page.pagenow == 1) {%>
+                        <span><</span>
+                    <% } else {%>
+                        <a><</a>
+                    <% }%>
+
+                    <% for(var i=listData.page.from; i<=listData.page.to; i++) {%>
+                        <% if(listData.page.pagenow == i) {%>
+                            <a class="active"><%= i%></a>
+                        <% } else {%>
+                            <a><%= i%></a>
+                        <% }%>
+                    <% }%>
+
+                    <% if(listData.page.pagenow < listData.page.totalpage) {%>
+                        <a>></a>
+                    <% } else {%>
+                        <span>></span>
+                    <% }%>
+                </div>
+            </div>
+        <% }%>
+    </div>
+    <ul class="join-car-list">
+
+        <%_.each(listData.lists || listData, function(obj) {%>
+            <li>
+                <div class="img" data-id="<%= obj.carid%>" data-city="<%= obj.city%>" data-color="<%= obj.color%>" data-bsfs="<%= obj.bsfs == 1 ? "手自一体" :(obj.bsfs === 2 ? "自动" : "手动")%>">
+                    <img src="<%= obj.picture%>" width="160" height="120">
+                    <span class="numeration"><i><%= obj.photocount%></i>
+                    </span>
+                </div>
+                <div class="txt">
+                    <div class="title-price">
+                        <h4><%= obj.title_l%></h4>
+                        <span class="price"><%= obj.price%>万</span>
+                    </div>
+                    <p class="year" data-year="<%= obj.sprq.substring(0,4)%>" data-km="<%= obj.bxlc%>">
+                        <%= obj.sprq.substring(0,4)%>年
+                        <i>|</i>
+                        <%= obj.bxlc%>万公里
+                    </p>
+                    <p class="company"><%= obj.shop_name%></p>
+                    <div class="btn">
+                        <span class="glb-btn glb-btn-white comparison" data-features="<%= listData.lists ? listData.feature[obj.carid] : obj.highlight %>">
+                            <span class="checkbox">
+                                <i class="<%= listData.compareIds.indexOf(obj.carid) > -1 ? 'checkbox-off' : 'checkbox-on'%>"></i>
+                            </span>
+                            对比
+                        </span>
+                        <span class="glb-btn collect <%= listData.collectionIds.indexOf(obj.carid) > -1 ? 'glb-btn-red' : 'glb-btn-white'%>">收藏</span>
+                    </div>
+                </div>
+                <i class="triangle"></i>
+            </li>
+        <% })%>
+    </ul>
+    <div class="result clearfix">
+        <% if(listData.lists && listData.page.totalpage != 0) {%>
+            <div class="result-fl" id="listCompareBtn">
+                <span>对比所选&nbsp;&gt;</span>
+            </div>
+            <div class="result-fr">
+                <div class="page">
+                    <% if(listData.page.pagenow == 1) {%>
+                        <span><</span>
+                    <% } else {%>
+                        <a><</a>
+                    <% }%>
+
+                    <% for(var i=listData.page.from; i<=listData.page.to; i++) {%>
+                        <% if(listData.page.pagenow == i) {%>
+                            <a class="active"><%= i%></a>
+                        <% } else {%>
+                            <a><%= i%></a>
+                        <% }%>
+                    <% }%>
+
+                    <% if(listData.page.pagenow < listData.page.totalpage) {%>
+                        <a>></a>
+                    <% } else {%>
+                        <span>></span>
+                    <% }%>
+                </div>
+            </div>
+        <% }%>
+    </div>
+</div>
