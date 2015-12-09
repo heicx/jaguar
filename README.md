@@ -1,5 +1,5 @@
 # jaguar
-The jaguar official website is made of backbone.js
+The jaguar official website developed in backbone.js
 
 ## Beta版
 http://beta.jaguar.iautos.cn
