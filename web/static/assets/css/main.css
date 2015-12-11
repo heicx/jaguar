@@ -30,9 +30,14 @@ textarea{padding:5px;box-shadow: 1px 2px 1px #cdcdcd inset;border:1px solid #9d9
 .header{background:url(../images/head-bg.jpg) repeat-x;height:55px;width:100%;overflow:hidden;zoom:1;}
 .header h1{margin:0;}
 .header h1 img{display:block;margin:8px auto 0;}
-.head-fl a,.head-fr  a{display:inline-block;margin:0 15px;color:#a3a2a2;}
-.head-fl{position:absolute;top:24px;left:25px;}
-.head-fr{position:absolute;top:24px;right:25px;}
+.head-fl a,.head-fr a{display:inline-block;color:#a3a2a2;}
+.head-fl a {margin:0 15px 0 0;}
+.head-fr a {margin:0 0 0 15px;}
+.head-fl{position:absolute;top:24px;left:0;}
+.head-fr{position:absolute;top:24px;right:0;}
+
+.head-main{width:900px;;margin:0 auto;position:relative;}
+
 .content-title-main{position:relative;}
 .content-title .title-sort li{width:98px;height:42px;line-height:42px;border-right:1px solid #d9d9d9;text-align:center;float:left;overflow:hidden;zoom:1;cursor: pointer;font-size:14px;}
 .content-title .title-sort{overflow:hidden;zoom:1;width:400px;position:absolute;left:0;top:0;}
@@ -49,10 +54,19 @@ textarea{padding:5px;box-shadow: 1px 2px 1px #cdcdcd inset;border:1px solid #9d9
 .car-list .title-sort{left:800px;top:0;}
 .car-list .content-title-operate .icon-loop{background:url(../images/icon-loop.png) no-repeat 0 -1px;width:15px;height:42px;display:inline-block;vertical-align:middle;margin-left:10px;}
 
-.content .banner ul{height: 380px;}
+.content .banner ul{height: 380px;position: relative;}
 .content .banner ul li{display: none;}
 .content .banner ul li.active{display: block;}
 .content .banner ul li img{height: 380px;width:100%;}
+
+.content .banner ul li span.banner-letters{position:absolute;width:900px;height:300px;top: 50%;left: 50%;margin-top: -150px;margin-left: -450px;}
+.content .banner ul li span i.letters1{background: url(../images/banner/w1.png) no-repeat;width:480px;height: 200px;display: block;margin:50px 0;}
+.content .banner ul li span i.letters2{background: url(../images/banner/w2.png) no-repeat;width:480px;height: 200px;display: block;margin:50px 0;}
+.content .banner ul li span i.letters3{background: url(../images/banner/w3.png) no-repeat;width:480px;height: 200px;display: block;margin:50px 0;}
+.content .banner ul li span i.letters4{background: url(../images/banner/w4.png) no-repeat;width:480px;height: 200px;display: block;margin:50px 0;}
+.content .banner ul li span i.letters5{background: url(../images/banner/w5.png) no-repeat;width:480px;height: 200px;display: block;margin:50px 0;}
+.content .banner ul li span i.letters6{background: url(../images/banner/w6.png) no-repeat;width:480px;height: 200px;display: block;margin:50px 0;}
+.content .banner ul li span i.letters7{background: url(../images/banner/w7.png) no-repeat;width:480px;height: 200px;display: block;margin:50px 0;}
 
 .breadcrumb {background:#4a4a4a;height:44px;border-top:1px solid #505050;border-bottom:5px solid #f0efed;}
 .breadcrumb-main{width:900px;margin:0 auto;height:44px;line-height:44px;}
@@ -462,7 +476,6 @@ textarea{padding:5px;box-shadow: 1px 2px 1px #cdcdcd inset;border:1px solid #9d9
 大于等于1281
  */
 @media screen and (min-width: 1281px){
-    .head-main{width:1280px;margin:0 auto;position:relative;}
     .content-title-main {width:1280px;margin:0 auto;overflow:hidden;zoom:1;height:42px;}
 
 	.car-list-box{width:1280px;margin:0 auto;position:relative;}
@@ -488,6 +501,7 @@ textarea{padding:5px;box-shadow: 1px 2px 1px #cdcdcd inset;border:1px solid #9d9
 	.car-list-box .w1280-module-6{position:absolute;right:0px;top:540px;width:250px;}
 	.car-list-box .w1280-module-7{position:absolute;left:0;top:385px;}
 
+	.head-main-content {width: 1280px;}
 }
 
 /*
@@ -504,8 +518,6 @@ textarea{padding:5px;box-shadow: 1px 2px 1px #cdcdcd inset;border:1px solid #9d9
 小于等于1280
  */
 @media screen and (max-width: 1280px){
-	.wrap {width: 1024px;}
-    .head-main{width:1024px;margin:0 auto;position:relative;}
 	.content-title .title-sort{left:590px;}
 	.content-title-operate{width:900px;left:0px;top:0;}
 
@@ -544,4 +556,6 @@ textarea{padding:5px;box-shadow: 1px 2px 1px #cdcdcd inset;border:1px solid #9d9
 	.content .banner ul li{display: none;text-align: center;}
 	.content .banner ul li.active{display: block;}
 	.content .banner ul li img{height: 230px;width:1200px;}
+
+	.head-main-content {width: 1024px;}
 }

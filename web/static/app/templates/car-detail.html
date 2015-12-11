@@ -33,7 +33,7 @@
             </span>
         </div>
         <div class="km" data-year="<%= doneData.car_detail.car.first_reg_date.split("-")[0]%>" data-km="<%= (doneData.car_detail.car.km-0).toFixed(2)%>">
-            <%= doneData.car_detail.car.first_reg_date.split("-")[0]%> 年
+            <%= _.indexOf(['1970', '2900', '1900'], doneData.car_detail.car.first_reg_date.split("-")[0]) > -1 ? '未上牌' : doneData.car_detail.car.first_reg_date.split("-")[0] + '年'%>
             <i>|</i>
             <%= (doneData.car_detail.car.km-0).toFixed(2)%> 万公里
             <% if(doneData.car_detail.emissions && doneData.car_detail.emissions.name) {%>
@@ -108,7 +108,7 @@
             <span class="main">行驶里程</span>
         </li>
         <li class="f3">
-            <span class="til"><%= doneData.car_detail.car.first_reg_date.split("-")[0]%> 年</span>
+            <span class="til"><%= _.indexOf(['1970', '2900', '1900'], doneData.car_detail.car.first_reg_date.split("-")[0]) > -1 ? '未上牌' : doneData.car_detail.car.first_reg_date.split("-")[0] + '年'%></span>
             <span class="main">首次上牌</span>
         </li>
         <li class="f4">

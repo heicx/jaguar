@@ -55,7 +55,7 @@
                         <span class="price"><%= obj.price%>万</span>
                     </div>
                     <p class="year" data-year="<%= obj.sprq.substring(0,4)%>" data-km="<%= obj.bxlc%>">
-                        <%= obj.sprq.substring(0,4)%>年
+                        <%= _.indexOf(['1970', '2900', '1900'], obj.sprq.substring(0,4)) > -1 ? '未上牌' : obj.sprq.substring(0,4) + '年'%>
                         <i>|</i>
                         <%= obj.bxlc%>万公里
                     </p>

@@ -319,7 +319,7 @@ define(["jquery", "underscore", "backbone", "app/config/base", "cookie", "app/mo
 			}));
 			this.trigger("resize");
 
-			$(".prev-next").attr({"data-curpageno": data.page.pagenow, "data-maxpageno": data.page.totalpage, "data-carid": data.lists[(type ? data.lists.length-1 : 0)].carid});
+			$(".prev-next").attr({"data-curpageno": data.page.pagenow, "data-maxpageno": data.page.totalpage, "data-carid": data.lists.length !== 0 ? data.lists[(type ? data.lists.length-1 : 0)].carid : ''});
 			$(".prev-next a").show();
 
 			if (Backbone.history.fragment.indexOf("compare") > -1) this.comparePageView.trigger("resize");

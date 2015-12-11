@@ -61,6 +61,7 @@ define(["jquery", "underscore", "backbone", "cookie", "app/views/homePageView", 
 				this.vSearchOptions = new SearchOptionsPageView;
 			}
 
+			$(".detail-list").css({position: "", top: "", left: 0});
 			this.vSearchOptions.searchListView.comparePageView.trigger("resize"); // hashchange时重新resize高度，主要防车详页的referrer
 			if ($(".car-list-search").css("display") === "none") {
 				$("#detailCont").animate({
