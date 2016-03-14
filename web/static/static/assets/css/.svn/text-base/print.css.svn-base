@@ -1,0 +1,11 @@
+.detail-list .detail-list-main {
+	margin: 0 auto;
+}
+.detail-list, .detail-list .detail-list-main {
+	border: none;
+	width: 650px;
+}
+
+.detail-list .join-car-list li {
+	height: 170px;
+}

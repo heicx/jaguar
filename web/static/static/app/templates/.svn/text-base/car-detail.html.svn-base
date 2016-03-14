@@ -1,0 +1,342 @@
+<div class="detail-focus clearfix">
+    <div class="focus-img">
+        <div class="carousel">
+            <div class="carousel-img">
+                <ul>
+                    <% if(doneData.car_detail.usedcar_photos.length){%>
+                        <li><img src="<%= doneData.car_detail.usedcar_photos[0].url%>" width="466" height="350"></li>
+                    <%}%>
+                </ul>
+            </div>
+            <div class="carousel-list" style="display:none;">
+                <a id="prevImg" class="prev" data-type="carimgs"></a>
+                <div class="list-img">
+                    <ul>
+                        <% if(doneData.car_detail.usedcar_photos.length){%>
+                            <% _.each(doneData.car_detail.usedcar_photos, function(img, index) {%>
+                                <li <%= index === 0 ? "class='active'" : ""%>><img src="<%= img.url%>" width="87" height="65"></li>
+                            <% })%>
+                        <%}%>
+                    </ul>
+                </div>
+                <a id="nextImg" class="next" data-type="carimgs"></a>
+            </div>
+        </div>
+    </div>
+    <div class="focus-operation">
+        <h2 data-carid="<%= doneData.car_detail.car.id%>" data-shopid="<%= doneData.car_detail.shop.id%>" data-pid="<%= doneData.car_detail.car.province_id%>" data-cid="<%= doneData.car_detail.car.city_id%>" data-groupid="<%= doneData.group == null ? '' : doneData.group.group_id%>">
+            <%= doneData.car_detail.car.title_l%>
+        </h2>
+        <div class="price">
+            <span class="num">
+                <%= doneData.car_detail.car.price%> <i>万</i>
+            </span>
+        </div>
+        <div class="km" data-year="<%= doneData.car_detail.car.first_reg_date.split("-")[0]%>" data-km="<%= (doneData.car_detail.car.km-0).toFixed(2)%>">
+            <%= _.indexOf(['1970', '2900', '1900'], doneData.car_detail.car.first_reg_date.split("-")[0]) > -1 ? '未上牌' : doneData.car_detail.car.first_reg_date.split("-")[0] + '年'%>
+            <i>|</i>
+            <%= (doneData.car_detail.car.km-0).toFixed(2)%> 万公里
+            <% if(doneData.car_detail.emissions && doneData.car_detail.emissions.name) {%>
+                <i>|</i>
+                <%= doneData.car_detail.emissions.name%>
+            <% }%>
+        </div>
+        <div class="area-box">
+            <p><%= doneData.car_detail.shop.company_fullname%></p>
+            <p class="grea"><%= doneData.car_detail.shop.address%></p>
+            <div class="linkman">
+                <%= doneData.car_detail.car.contacts_phone ? doneData.car_detail.car.contacts_phone : "暂无"%>
+                <i>|</i>
+                <%= doneData.car_detail.shop.contact_user_name%>
+            </div>
+            <div class="more-btn">
+                <a href="#shop">本店更多车源&nbsp;&gt;</a>
+                <% if(doneData.group != null) {%>
+                <a class="lt" href="#group">集团车源&nbsp;&gt;</a>
+                <% }%>
+            </div>
+        </div>
+        <div class="focus-rg-btn clearfix">
+            <div class="detail-btn">
+                <a id="reserveBtn" class="glb-btn glb-btn-red">预约看车</a>
+                <a id="compareBtn" class="glb-btn glb-btn-white db" data-color="<%= doneData.car_detail.color.name%>" data-bsfs="<%= doneData.car_detail.model.transmission_type_name%>" data-city="<%= doneData.car_detail.city.area_name %>" data-features="<%= doneData.car_detail.car.highlight%>" data-carid="<%= doneData.car_detail.car.id%>">
+                    <span class="checkbox">
+                        <i class="<%= doneData.compareIds.indexOf(doneData.car_detail.car.id) > -1 ? 'checkbox-off' : 'checkbox-on'%>"></i>
+                        <input type="checkbox"></span>
+                    加入对比
+                </a>
+                <a id="collectionBtn" class="glb-btn <%= doneData.collectionIds.indexOf(doneData.car_detail.car.id) > -1 ? 'glb-btn-red' : 'glb-btn-white'%>" data-carid="<%= doneData.car_detail.car.id%>">加入收藏</a>
+            </div>
+            <div class="detail-share bdsharebuttonbox" data-tag="share_1" id="bdshare">
+                <a id="weibo" class="glb-btn glb-btn-white" data-cmd="tsina" style="float:none;padding-left:0;margin:0;margin-bottom:10px;">
+                    <i class="weibo"></i>
+                    分享至微博
+                </a>
+                <a id="wechat" class="glb-btn glb-btn-white" style="float:none;padding-left:0;margin:0;margin-bottom:10px;">
+                    <i class="weixin"></i>
+                    分享至微信
+                </a>
+                <div class="code-img" id="QRCode" style="display:none">
+                    <img src="" width="150" height="150">
+                    <p>扫描二维码分享至微信</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="detail-tabs" id="detialTabs">
+    <ul>
+        <li class="active" data-anchor="detail-info">概述</li>
+        <li data-anchor="detail-param">参数</li>
+        <li data-anchor="detail-config">配置</li>
+        <% if(doneData.highlight.length) {%>
+        <li data-anchor="detail-bright">车系亮点</li>
+        <% }%>
+        <li data-anchor="commitment">承诺</li>
+        <li data-anchor="detail-same-car">同价位车源</li>
+        <li data-anchor="detail-dealer">经销商信息</li>
+    </ul>
+</div>
+<div class="detail-info">
+    <ul>
+        <li class="f1">
+            <span class="til"><%= doneData.car_detail.car.price%> 万元</span>
+            <span class="main">售价</span>
+        </li>
+        <li class="f2">
+            <span class="til"><%= (doneData.car_detail.car.km-0).toFixed(2)%> 万公里</span>
+            <span class="main">行驶里程</span>
+        </li>
+        <li class="f3">
+            <span class="til"><%= _.indexOf(['1970', '2900', '1900'], doneData.car_detail.car.first_reg_date.split("-")[0]) > -1 ? '未上牌' : doneData.car_detail.car.first_reg_date.split("-")[0] + '年'%></span>
+            <span class="main">首次上牌</span>
+        </li>
+        <li class="f4">
+            <span class="til"><%= doneData.car_detail.fuel_type ? doneData.car_detail.fuel_type.name : "暂无" %></span>
+            <span class="main">燃油类型</span>
+        </li>
+        <li class="f5">
+            <span class="til"><%= doneData.car_detail.emissions ? doneData.car_detail.emissions.name : "暂无" %></span>
+            <span class="main">排放标准</span>
+        </li>
+        <li class="f6">
+            <span class="til"><%= doneData.car_detail.color ? doneData.car_detail.color.name : "暂无" %></span>
+            <span class="main">车身颜色</span>
+        </li>
+        <li class="f7">
+            <span class="til"><%= doneData.car_detail.model.transmission_type_name %></span>
+            <span class="main">变速箱</span>
+        </li>
+        <li class="f8">
+            <span class="til"><%= (doneData.car_detail.model.fuel_consumption_official-0).toFixed(1) %> L/100Km</span>
+            <span class="main">油耗</span>
+        </li>
+        <li class="f9">
+            <span class="til"><%= doneData.car_detail.city.area_name %></span>
+            <span class="main">所在地区</span>
+        </li>
+        <li class="f10">
+            <span class="til"><%= doneData.licenseArea %></span>
+            <span class="main">车牌所在地</span>
+        </li>
+
+    </ul>
+</div>
+<div class="detail-param">
+    <div class="detail-param-main">
+        <p class="title">车型参数</p>
+        <ul>
+            <li>
+                <span class="til">长度(mm)</span>
+                <span><%= doneData.car_detail.model.length%></span>
+            </li>
+            <li>
+                <span class="til">宽度(mm)</span>
+                <span><%= doneData.car_detail.model.width %></span>
+            </li>
+            <li>
+                <span class="til">高度(mm)</span>
+                <span><%= doneData.car_detail.model.height %></span>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <span class="til">轴距(mm)</span>
+                <span><%= doneData.car_detail.model.wheelbase %></span>
+            </li>
+            <li>
+                <span class="til">排气量(L)</span>
+                <span><%= doneData.car_detail.model.displacement %></span>
+            </li>
+            <li>
+                <span class="til">驱动方式</span>
+                <span><%= doneData.car_detail.model.driving_mode_id == 1 ? "前驱" : (doneData.car_detail.model.driving_mode_id == 2 ? "后驱" : "四驱")%></span>
+            </li>
+        </ul>
+        <ul class="last">
+            <li>
+                <span class="til">0-100km/h 加速度</span>
+                <span><%= doneData.car_detail.model.speedup_official %></span>
+            </li>
+            <li>
+                <span class="til">最大功率(kw(ps)/rpm)</span>
+                <span><%= doneData.car_detail.model.max_power_kw %></span>
+            </li>
+            <li>
+                <span class="til">油箱容积(L)</span>
+                <span><%= doneData.car_detail.model.fuel_tank %></span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="detail-param detail-config">
+    <div class="detail-param-main detail-param-cof">
+        <p class="title">车型配置</p>
+        <ul>
+            <% _.each(doneData.features, function(name, index, list) {%>
+                <li>
+                    <span class="til"><%= name%></span>
+                </li>
+            <% })%>
+        </ul>
+    </div>
+</div>
+<% if(doneData.highlight.length) {%>
+<div class="detail-bright">
+    <p class="title">车系亮点</p>
+    <div class="detail-bright-main">
+        <a id="prevFeature" data-type="highlights" class="prev"></a>
+        <div class="bright-box">
+            <ul style="width:1000000px;">
+            <% _.each(doneData.highlight, function(obj, index) {%>
+                <li <%= index === 0 ? "class='active'" : ""%>>
+                    <div class="img">
+                        <img src="<%= obj.img%>" width="355" height="178" />
+                    </div>
+                    <div class="txt">
+                        <p><%= obj.desc%></p>
+                    </div>
+                </li>
+            <% })%>
+            </ul>
+        </div>
+        <a id="nextFeature" data-type="highlights" class="next"></a>
+    </div>
+</div>
+<% }%>
+<div class="commitment">
+    <div class="text">
+        <span class="title">我们对您的承诺</span>
+        <div class="mark">
+            <span class="txt">无论是新车还是认证二手车，每辆捷豹自诞生之日就天赋非凡运动基因。认证二手车会如诞生时一样，被注入年轻且富有活力的驾驭基因，让您开启无忧驾行。认证二手车确保了每辆捷豹在交付车主时车况完美无瑕，尽释速度与激情。选择捷豹，享受承诺。</span>
+        </div>
+    </div>
+    <div class="warranty">
+        <p class="title">2年免费质量保修</p>
+        <p>与所有新车一样，经由认证的捷豹二手车享受进口原厂专属配件保修：所有突发机械与电气故障均由捷豹专业技师维修保养；2年质保期内，一旦收到相关信息，立刻启动索赔流程；质保服务均由捷豹官方授权的经销商提供，确保纯正品质。</p>
+
+        <p class="title">同于新车标准的24个月24小时道路救援</p>
+        <p>捷豹道路救援提供全方位救援服务，服务内容包括不可预测的车辆无法移动、爆胎等故障，及钥匙遗失等微小突发事件。2年质保期内，捷豹道路救援服务将全年365天，全天24小时随时待命，免去车主后顾之忧。此外，捷豹道路救援还包括：车辆启动故障支持、继续行路故障支持、车辆维护、住宿安排等。适用于所有条款。</p>
+
+        <p class="title">165项多点检测</p>
+        <p>为确保每辆捷豹的机械与电气处于最佳状态，车身焕然如新，捷豹认证二手车的检测清单共包含165项多点检测内容。捷豹将提供最尖端的技术、工具和检测设备，经由捷豹专业技师严格检测，审查漆面、内饰、发动机整备、路试和最终检测后，才可获得签字认证。只有通过165项专业检测的二手车才能成为捷豹认证二手车。</p>
+
+        <p class="title">我们的专业技师</p>
+        <p>捷豹认证二手车的整备工作，均由具备专业知识技能、关注细节的捷豹专业技师使用专用工具、检测设备及原厂配件完成。为确保始终达到最严格标准，所有整备工作只由官方授权的经销商完成。</p>
+
+        <p class="title">里程和维修保养记录确认</p>
+        <p>每台捷豹认证二手车都会提供里程和维修保养记录。里程审查是对每位车主的基本承诺，以确保车主充分了解认证二手车的历史情况后，根据车况安心驾控，安全出行。</p>
+
+        <p class="title">由捷豹专业技师完成的路试评估</p>
+        <p>每辆捷豹二手车在道路检测时，均经由捷豹专业技师进行性能评估：包括悬挂、减震和制动系统、引擎性能、变速箱等九项内容，以确保车辆性能保持最佳状态。通过严格路试测验，捷豹认证二手车将如同新生般，被注入年轻且富有活力的驾驭基因。</p>
+
+        <p class="title">独立审计</p>
+        <p>为保证捷豹品牌及经销商始终如一的高品质，服务、设施和人员需通过独立的审计流程，内容包括保养设备及车辆本身，涵盖车主能接触到的认证二手车项目所谓所有方面。</p>
+    </div>
+</div>
+<% if(doneData.same_price_cars) {%>
+<div class="detail-param">
+    <div class="detail-param-main detail-same-car" style="<%= doneData.same_price_cars.length ? '' : 'display:none;'%>">
+        <p class="title">同价位车源</p>
+        <ul>
+            <% _.each(doneData.same_price_cars, function(obj, index) {%>
+                <% if(index < 3) {%>
+                    <li>
+                        <img class="img" src="<%= obj.picture%>" width="220" height="165">
+                        <h4><%= obj.title_l%></h4>
+                        <p class="price"><%= obj.price%>万</p>
+                        <ul>
+                            <li>首次上牌：<%= obj.sprq.split("-")[0]%>年</li>
+                            <li>行驶里程：<%= obj.bxlc%>万公里</li>
+                            <li>车身颜色：<%= obj.color%></li>
+                            <li>变速箱：<%= obj.bsfs == 1 ? "手自一体" :(obj.bsfs === 2 ? "自动" : "手动")%></li>
+                            <li>所在城市：<%= obj.city%></li>
+                        </ul>
+                        <a class="glb-btn glb-btn-white" data-id="<%= obj.carid%>">查看</a>
+                    </li>
+                <% }%>
+            <% })%>
+        </ul>
+    </div>
+</div>
+<% }%>
+
+<div class="detail-dealer" id="detailDealer">
+    <div class="detail-dealer-main detail-focus">
+        <p class="title">经销商信息</p>
+        <div class="map de-map" id="static_map" data-lon="<%= doneData.car_detail.shop.longitude ? doneData.car_detail.shop.longitude : "116.40396"%>" data-lat="<%= doneData.car_detail.shop.latitude ? doneData.car_detail.shop.latitude : "39.915129" %>">
+            <img src="<%= window.__URL + 'assets/images/map.jpg'%>" width="418" height="470"></div>
+        <div class="focus-operation">
+            <div class="area">
+                <p><%= doneData.car_detail.shop.company_fullname%></p>
+                <p class="grea"><%= doneData.car_detail.shop.address%></p>
+            </div>
+            <p class="tel"><%= doneData.car_detail.contacts_phone%></p>
+            <div class="area-box">
+                <div class="more-btn">
+                    <a href="#shop">本店更多车源&nbsp;&gt;</a>
+                    <% if(doneData.group != null) {%>
+                    <a class="lt" href="#group">集团车源&nbsp;&gt;</a>
+                    <% }%>
+                </div>
+            </div>
+            <div class="form-main">
+                <p class="title">联系经销商</p>
+                <dl>
+                    <dt>姓名</dt>
+                    <dd>
+                        <input type="text" id="contactName" maxlength="8" placeholder="请输入您的姓名" class="text" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>称谓</dt>
+                    <dd>
+                        <div class="label">
+                            <label>
+                                <input type="radio" name="contactSex" checked="checked" value="先生" />
+                                先生
+                            </label>
+                            <label>
+                                <input type="radio" name="contactSex" value="女士"/>
+                                女士
+                            </label>
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>手机号</dt>
+                    <dd>
+                        <input type="text" id="contactPhone" maxlength="11" placeholder="请输入您的手机号" class="text">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>留言</dt>
+                    <dd>
+                        <textarea id="contactRemark" cols="30" rows="10" placeholder="请输入您的留言" maxlength="100"></textarea>
+                    </dd>
+                </dl>
+            </div>
+            <input type="button" class="glb-btn glb-btn-red" id="contactInfoBtn" value="提交">
+        </div>
+    </div>
+</div>

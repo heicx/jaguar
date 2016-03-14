@@ -1,0 +1,130 @@
+<div class="car-show">
+    <ul>
+        <%
+            var fakeData = [
+                {
+                    "className": "xe",
+                    "width": "172",
+                    "height": "51",
+                    "img": "car1.png"
+                },
+                {
+                    "className": "xf",
+                    "width": "164",
+                    "height": "53",
+                    "img": "car2.png"
+                },
+                {
+                    "className": "xf-sp",
+                    "width": "170",
+                    "height": "55",
+                    "img": "car7.png"
+                },
+                {
+                    "className": "xj",
+                    "width": "183",
+                    "height": "50",
+                    "img": "car6.png"
+                },
+                {
+                    "className": "newxf",
+                    "width": "172",
+                    "height": "51",
+                    "img": "car3.png"
+                },
+                {
+                    "className": "ftype",
+                    "width": "164",
+                    "height": "53",
+                    "img": "car4.png"
+                },
+                {
+                    "className": "ftype1",
+                    "width": "156",
+                    "height": "50",
+                    "img": "car5.png"
+                },
+            ]
+
+            var fakeArr = [1,2,3,4,5,6,7];
+        %>
+        <% _.each(fakeArr, function(index) { %>
+            <% if(_.pick(doneData.options.series, index)[index]) { %>
+                    <li class="<%= fakeData[index-1].className%>">
+                        <% if(index > 4) {%>
+                        <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="<%= fakeData[index-1].width%>" height="<%= fakeData[index-1].height%>" />
+                        <% }%>
+                        <div class="name">
+                            <span class="checkbox">
+                                <% if(doneData.param.cus_series_id !== undefined) {%>
+                                    <% if(doneData.param.cus_series_id.indexOf(index) > -1) {%>
+                                        <i class="checkbox-off" data-val="<%= index%>"></i>
+                                    <% } else {%>
+                                        <i class="checkbox-on" data-val="<%= index%>"></i>
+                                    <% } %>
+                                <% } else {%>
+                                    <i class="checkbox-on" data-val="<%= index%>"></i>
+                                <% } %>
+                            </span>
+                            <i class="txt"></i>
+                        </div>
+                        <% if(index <= 4){%>
+                            <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="<%= fakeData[index-1].width%>" height="<%= fakeData[index-1].height%>" />
+                        <% }%>
+                    </li>
+            <% } else {%>
+                <li class="<%= fakeData[index-1].className%> off">
+                    <% if(index > 4) {%>
+                    <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="<%= fakeData[index-1].width%>" height="<%= fakeData[index-1].height%>" />
+                    <% }%>
+                    <div class="name">
+                        <span class="checkbox">
+                            <i class="checkbox-on" data-val="<%= index%>"></i>
+                        </span>
+                        <i class="txt"></i>
+                    </div>
+                    <% if(index <= 4){%>
+                        <img src="<%= doneData._url%>/assets/images/<%= fakeData[index-1].img%>" width="<%= fakeData[index-1].width%>" height="<%= fakeData[index-1].height%>" />
+                    <% }%>
+                </li>
+            <% } %>
+        <% }) %>
+    </ul>
+</div>
+<div class="index-search">
+    <div class="search-box">
+        <select id="province">
+            <option value="all">全部省份</option>
+            <% _.each(doneData.options.province, function(data) {%>
+                <% if(doneData.param.province_py === data.nickName) {%>
+                    <option value="<%= data.nickName%>" selected><%= data.name%></option>
+                <%} else {%>
+                    <option value="<%= data.nickName%>"><%= data.name%></option>
+                <% }%>
+            <% })%>
+        </select>
+        <select id="city">
+            <option value="all">全部城市</option>
+            <% if(doneData._targetEvt === "change"){%>
+                <% _.each(doneData.options.city, function(data) {%>
+                    <% if(doneData.param.city_py === data.nickName) {%>
+                        <option value="<%= data.nickName%>" selected><%= data.name%></option>
+                    <%} else {%>
+                        <option value="<%= data.nickName%>"><%= data.name%></option>
+                    <% }%>
+                <% })%>
+            <% }%>
+        </select>
+        <span class="font-txt"><%= doneData.totalNumber%></span>
+        <span class="txt">匹配车辆</span>
+        <input type="button" class="glb-btn" id="searchBtn" value="搜索" />
+    </div>
+</div>
+<% if(doneData.param.province_py) {%>
+<input id="province-py" type="hidden" name="province_py" value="<%= doneData.param.province_py%>" />
+<% }%>
+<% if(doneData.param.city_py) {%>
+<input id="city-py" type="hidden" name="city_py" value="<%= doneData.param.city_py%>" />
+<% }%>
+<% if(doneData.param.cus_series_id) {%>
+<input id="series-ids" type="hidden" name="cus_series_id" value="<%= doneData.param.cus_series_id%>" /><% }%>

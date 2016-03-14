@@ -1,0 +1,52 @@
+10
+
+dir
+469
+svn://heichenxuan@192.168.1.200/brand_zone/jaguar/web/static/assets/libs
+svn://heichenxuan@192.168.1.200/brand_zone
+
+
+
+2015-12-09T10:58:17.537071Z
+409
+heichenxuan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5a8ab45b-3aff-4b5d-8064-dcada7699c30
+
+jquery
+dir
+
+backbone.localStorage
+dir
+
+backbone
+dir
+
+jquery-plug-in
+dir
+
+requirejs
+dir
+
+underscore
+dir
+
+respond
+dir
+
+requirejs-text
+dir
+

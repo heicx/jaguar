@@ -1,0 +1,56 @@
+
+<% if(compareData.models.length === 0) {%>
+<div class="compare-title compare-null">
+	<h2>比较车辆</h2>
+	<p>暂无比较车辆，请至少选择2辆进行比较</p>
+</div>
+<%} else {%>
+<h2>比较车辆</h2>
+<table class="compare-table">
+	<tr>
+		<td width="190">
+			<div class="compare-title">
+				<!-- <p class="num">1-3条 共10条</p> -->
+			</div>
+		</td>
+		<% var k = 0;%>
+		<% _.each(compareData.models, function(obj) {%>
+		<td width="150" class="<%= k%2 == 0 ? 'even' : 'odd'%>">
+			<div class="detail-same-car <%= k%2 == 0 ? '' : ''%>">
+				<i class="compare-close" data-id="<%= obj.attributes._id%>"></i>
+				<img class="img" src="<%= obj.attributes.img%>" width="135" height="90">
+				<h4><%= obj.attributes.title%></h4>
+				<p class="price"><%= obj.attributes.price%></p>
+				<ul>
+					<li><%= obj.attributes.time %></li>
+					<li><%= Number(obj.attributes.km).toFixed(2) %>万公里</li>
+					<li><%= obj.attributes.color %></li>
+					<li><%= obj.attributes.bsfs %></li>
+					<li><%= obj.attributes.area %></li>
+				</ul>
+				<a class="glb-btn glb-btn-gy view-detail" data-id="<%= obj.attributes._id%>">查看详情</a>
+			</div>
+			<% k+= 1;%>
+		</td>
+		<% })%>
+	</tr>
+
+	<% var i = 0;%>
+
+	<% _.each(compareData.highlights, function(name, index) {%>
+		<tr class="list <%= i==0 ? 'top' : ''%>">
+			<td width="180" class="til"><%= name%></td>
+			<% var j = 0;%>
+			<% _.each(compareData.models, function(obj) {%>
+				<td width="140" class="<%= j%2 == 0 ? 'gy1' : ''%>">
+					<%  if(_.indexOf(obj.attributes.features.split(","), index) > -1){%>
+						<i class="feature"></i>
+					<% }%>
+					<% j+= 1;%>
+				</td>
+			<% })%>
+		</tr>
+		<% i += 1;%>
+	<% })%>
+</table>
+<% }%>
