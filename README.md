@@ -1,8 +1,5 @@
 # jaguar
-The jaguar official website developed in backbone.js
-
-## Beta版
-http://jgused.jlrdealer.cn/
+The jaguar official website. 
 
 ## Note
-- 服务端只push了view部分代码，仅供参考。
+> `服务端只 push 了 view 部分代码，仅供参考`。
